@@ -9,10 +9,20 @@
         android:id="@+id/videoFragment"
         android:name="com.skyline_info_system.baseapp.views.fragment.VideoFragment"
         android:label="VideoFragment"
-        tools:layout="@layout/fragment_video" />
+        tools:layout="@layout/fragment_video">
+        <action
+            android:id="@+id/action_videoFragment_to_videoPlayerFragment"
+            app:destination="@id/videoPlayerFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.skyline_info_system.baseapp.views.fragment.SearchFragment"
         android:label="SearchFragment"
         tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/videoPlayerFragment"
+        android:name="com.skyline_info_system.baseapp.views.fragment.VideoPlayerFragment"
+        android:label="VideoPlayerFragment"
+        tools:layout="@layout/fragment_video_player" />
+
 </navigation>

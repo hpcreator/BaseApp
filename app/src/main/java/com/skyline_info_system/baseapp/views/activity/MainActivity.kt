@@ -56,6 +56,13 @@ class MainActivity : AppCompatActivity() {
             navController =
                 (supportFragmentManager.findFragmentById(fragmentContainer.id) as NavHostFragment).findNavController()
             bottomNavigationView.setupWithNavController(navController)
+
+            navController.addOnDestinationChangedListener { _, destination, _ ->
+                when (destination.id) {
+                    R.id.videoFragment,R.id.searchFragment -> bottomNavigationView.visible()
+                    else -> bottomNavigationView.gone()
+                }
+            }
         }
 
 
