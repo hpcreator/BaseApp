@@ -18,11 +18,34 @@
         android:id="@+id/searchFragment"
         android:name="com.skyline_info_system.baseapp.views.fragment.SearchFragment"
         android:label="SearchFragment"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchFragment_to_photoPickerFragment"
+            app:destination="@id/photoPickerFragment" />
+    </fragment>
     <fragment
         android:id="@+id/videoPlayerFragment"
         android:name="com.skyline_info_system.baseapp.views.fragment.VideoPlayerFragment"
         android:label="VideoPlayerFragment"
         tools:layout="@layout/fragment_video_player" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.skyline_info_system.baseapp.views.fragment.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_whatsAppMessageFragment"
+            app:destination="@id/whatsAppMessageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/whatsAppMessageFragment"
+        android:name="com.skyline_info_system.baseapp.views.fragment.WhatsAppMessageFragment"
+        android:label="WhatsAppMessageFragment"
+        tools:layout="@layout/fragment_whats_app_message" />
+    <fragment
+        android:id="@+id/photoPickerFragment"
+        android:name="com.skyline_info_system.baseapp.views.fragment.PhotoPickerFragment"
+        android:label="PhotoPickerFragment"
+        tools:layout="@layout/fragment_photo_picker" />
 
 </navigation>

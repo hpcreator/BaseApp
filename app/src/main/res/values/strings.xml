@@ -1,10 +1,21 @@
 <resources>
     <string name="app_name">Base App</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--alert messages-->
     <string name="online">Online</string>
     <string name="offline">Offline</string>
     <string name="dismiss">Dismiss</string>
 
+    <!--Menu Items-->
     <string name="video">Video</string>
     <string name="search">Search</string>
+    <string name="profile">Profile</string>
+
+
+    <string name="connectWhatsapp">Connect Whatsapp</string>
+    <string name="send_message_on_whatsapp">Send messages on <b>WhatsApp</b> to those who are not in your contactList.</string>
+    <string name="send_on_whatsapp">Send on Whatsapp</string>
+    <string name="search_components">Search all latest component task here !!</string>
+    <string name="pick_photo">Pick Photo</string>
+    <string name="pick_multiple_photos">Pick Multiple Photos</string>
 </resources>

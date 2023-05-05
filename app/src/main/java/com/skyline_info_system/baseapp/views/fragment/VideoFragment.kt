@@ -35,10 +35,11 @@ class VideoFragment : BaseFragment() {
 
     private fun setupRecyclerview() {
         videoList = arrayListOf()
-        videoAdapter = VideoAdapter(requireContext(), videoList) { _ ->
+        videoAdapter = VideoAdapter(requireContext(), videoList) {
             findNavController().navigate(R.id.action_videoFragment_to_videoPlayerFragment)
         }
-        binding.rvVideos.adapter = videoAdapter
+        binding.adapter = videoAdapter
+        //binding.rvVideos.adapter = videoAdapter
     }
 
     private fun getVideoList() {
@@ -50,16 +51,20 @@ class VideoFragment : BaseFragment() {
                         videoList = it.data!!
                         videoAdapter.addVideos(videoList)
                     }
+
                     is ApiResponse.SessionExpire -> {
                         hideProgressDialog()
                     }
+
                     is ApiResponse.Error -> {
                         hideProgressDialog()
                         binding.root.showSnackBar(it.message.toString())
                     }
+
                     is ApiResponse.Loading -> {
                         showProgressDialog()
                     }
+
                     else -> {
                         hideProgressDialog()
                         binding.root.showSnackBar(it?.message.toString())

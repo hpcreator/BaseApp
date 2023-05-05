@@ -59,8 +59,8 @@ class MainActivity : AppCompatActivity() {
 
             navController.addOnDestinationChangedListener { _, destination, _ ->
                 when (destination.id) {
-                    R.id.videoFragment,R.id.searchFragment -> bottomNavigationView.visible()
-                    else -> bottomNavigationView.gone()
+                    R.id.videoPlayerFragment -> bottomNavigationView.gone()
+                    else -> bottomNavigationView.visible()
                 }
             }
         }
