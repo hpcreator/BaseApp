@@ -2,6 +2,8 @@ package com.skyline_info_system.baseapp.utils
 
 import android.content.Context
 import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import com.skyline_info_system.baseapp.network.ErrorModel
@@ -12,15 +14,23 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.ResponseBody
 import java.io.File
-import java.util.*
+import java.util.Locale
 
+fun Context.isNetworkAvailable(): Boolean {
+    val manager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val capabilities = manager.getNetworkCapabilities(manager.activeNetwork)
+    return if (capabilities != null) {
+        capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) || capabilities.hasTransport(
+            NetworkCapabilities.TRANSPORT_WIFI
+        ) || capabilities.hasTransport(
+            NetworkCapabilities.TRANSPORT_ETHERNET
+        )
+    } else false
+}
+
+fun Fragment.isNetworkAvailable() = requireContext().isNetworkAvailable()
 
 object NetworkExtensions {
-    fun Context.isNetworkConnected(): Boolean {
-        val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
-        val netInfo = cm!!.activeNetworkInfo
-        return netInfo != null && netInfo.isConnectedOrConnecting
-    }
 
     fun getErrorMessage(responseBody: ResponseBody?): ErrorModel? {
         try {

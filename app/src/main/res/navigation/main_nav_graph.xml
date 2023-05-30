@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_searchFragment_to_photoPickerFragment"
             app:destination="@id/photoPickerFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_carouselFragment"
+            app:destination="@id/carouselFragment" />
     </fragment>
     <fragment
         android:id="@+id/videoPlayerFragment"
@@ -47,5 +50,10 @@
         android:name="com.skyline_info_system.baseapp.views.fragment.PhotoPickerFragment"
         android:label="PhotoPickerFragment"
         tools:layout="@layout/fragment_photo_picker" />
+    <fragment
+        android:id="@+id/carouselFragment"
+        android:name="com.skyline_info_system.baseapp.views.fragment.CarouselFragment"
+        android:label="CarouselFragment"
+        tools:layout="@layout/fragment_carousel" />
 
 </navigation>

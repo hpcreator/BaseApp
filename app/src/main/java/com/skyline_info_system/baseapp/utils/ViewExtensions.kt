@@ -1,8 +1,13 @@
 package com.skyline_info_system.baseapp.utils
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -33,6 +38,27 @@ fun Context.showToast(msg: String, length: Int = Toast.LENGTH_SHORT) {
 
 fun Fragment.showToast(msg: String, length: Int = Toast.LENGTH_SHORT) {
     requireContext().showToast(msg, length)
+}
+
+val EditText.value
+    get() = text?.toString()?.trim() ?: ""
+
+fun Activity.startActivity(
+    className: Class<*>,
+    finishCurrent: Boolean = false,
+    extra: (Intent.() -> Unit)? = null,
+) {
+    val intent = Intent(this, className)
+    extra?.invoke(intent)
+    startActivity(intent)
+    if (finishCurrent) finish()
+
+    /**
+     * Example use of above extension is :
+     * startActivity(MainActivity::class.java) {
+     *  putExtra("key", "value")
+     * }
+     * */
 }
 
 fun View.showSnackBar(message: String) {

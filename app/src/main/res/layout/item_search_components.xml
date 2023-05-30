@@ -30,11 +30,12 @@
                 android:paddingVertical="5dp"
                 android:textStyle="bold|italic"
                 android:text="@{componentName}"
+                android:paddingHorizontal="5dp"
                 android:gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Photo Picker for Android 13" />
+                tools:text="Create Folder to Root Directory for Android 13" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>
