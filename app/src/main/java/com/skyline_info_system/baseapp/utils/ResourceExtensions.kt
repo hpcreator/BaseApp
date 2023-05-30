@@ -28,3 +28,11 @@ fun Context.text(@StringRes resId: Int? = null, string: String = "") = if (resId
 fun Context.isPermissionGranted(permission: String) = run {
     ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
 }
+
+fun Context.toDp(px: Int): Float {
+    return px / resources.displayMetrics.density
+}
+
+fun Context.toPx(dp: Int): Int {
+    return (dp * resources.displayMetrics.density).toInt()
+}

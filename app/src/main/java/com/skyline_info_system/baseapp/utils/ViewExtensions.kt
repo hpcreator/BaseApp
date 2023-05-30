@@ -3,8 +3,12 @@ package com.skyline_info_system.baseapp.utils
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
+import android.graphics.Color
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.TextPaint
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.util.Log
 import android.view.View
 import android.widget.EditText
@@ -12,6 +16,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import coil.load
@@ -21,6 +26,7 @@ import coil.request.ImageRequest
 import coil.request.SuccessResult
 import coil.transform.CircleCropTransformation
 import coil.transform.RoundedCornersTransformation
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.skyline_info_system.baseapp.R
 
@@ -112,4 +118,78 @@ fun ImageView.loadImage(
             Log.e("TAG", "loadImage: cancel")
         })
     }
+}
+
+/**
+ * Show Material alert dialog.
+ * @param ThemeOverlay.Material3.MaterialAlertDialog.Centered used to show icon at center of dialog.
+ * */
+fun Context.showAlert(
+    @DrawableRes icon: Int? = null,
+    @StringRes titleResource: Int? = null,
+    titleString: String? = null,
+    @StringRes messageResource: Int? = null,
+    messageString: String? = null,
+    positiveButton: String = "OK",
+    negativeButton: String = "",
+    neutralButton: String = "",
+) {
+    val dialogBuilder = MaterialAlertDialogBuilder(this)
+    if (icon != null) {
+        dialogBuilder.setIcon(icon)
+    }
+    if (titleResource != null) {
+        dialogBuilder.setTitle(titleResource)
+    } else {
+        dialogBuilder.setTitle(titleString)
+    }
+    if (messageResource != null) {
+        dialogBuilder.setMessage(messageResource)
+    } else {
+        dialogBuilder.setMessage(messageString)
+    }
+    dialogBuilder.setPositiveButton(positiveButton) { dialog, which ->
+        // Respond to positive button press
+    }
+    if (negativeButton.isNotEmpty())
+        dialogBuilder.setNegativeButton(negativeButton) { dialog, which ->
+            // Respond to negative button press
+        }
+    if (neutralButton.isNotEmpty())
+        dialogBuilder.setNeutralButton(neutralButton) { dialog, which ->
+            // Respond to neutral button press
+        }
+    dialogBuilder.show()
+}
+
+fun TextView.addLinkText(
+    stringToSpan: String,
+    underlined: Boolean,
+    bold: Boolean,
+    color: Int?,
+    action: (() -> Unit)? = null,
+) {
+    val spannableString = SpannableString(text)
+    val textColor = color ?: currentTextColor
+    val clickableSpan = object :ClickableSpan(){
+        override fun updateDrawState(drawState: TextPaint) {
+            super.updateDrawState(drawState)
+            drawState.isUnderlineText = underlined
+            drawState.isFakeBoldText = bold
+            drawState.color = textColor
+        }
+        override fun onClick(widget: View) {
+            action?.invoke()
+        }
+    }
+    val index = spannableString.indexOf(stringToSpan)
+    spannableString.setSpan(
+        clickableSpan,
+        index,
+        index + stringToSpan.length,
+        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+    )
+    text = spannableString
+    movementMethod = LinkMovementMethod.getInstance()
+    highlightColor = Color.TRANSPARENT
 }
